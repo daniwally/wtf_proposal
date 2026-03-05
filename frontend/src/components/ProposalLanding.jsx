@@ -16,7 +16,7 @@ const ASSETS = {
   logoWtfWhite: "https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/ychnnfb7_logo-wtf.png",
   logoWtfBlack: "https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/6fw22kmg_logo-wtf-negro.png",
   vineyard1: "https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/zcoibi26_u2462154512_imagine_close_up_shot_of_a_grape_tree_in_a_vineya_ac2b6445-5f2f-4b54-b627-c7ace1024fdc_1.png",
-  vineyard2: "https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/oash0080_u2462154512_Rustic_vineyard_in_Puglia_during_golden_sunset_ro_b2d7dc40-0b37-41be-a164-333d55112326_0%20%281%29.png",
+  vineyard2: "https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/jl6vtjbu_u2462154512_Rustic_vineyard_in_Puglia_during_golden_sunset_ro_b2d7dc40-0b37-41be-a164-333d55112326_0%20%281%29.png",
   grapes1: "https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/iz9dvpfg_u2462154512_Extreme_macro_editorial_photograph_of_strong_slig_d42a410b-8b34-44dd-93e5-b01f1b58fd9e_0.png",
   grapes2: "https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/5f7q5nas_u2462154512_Ultra-immersive_macro_perspective_moving_along_th_fd150ffc-adfd-4287-85d7-7f0444d56e86_1.png",
   grapes3: "https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/qq7k0y6g_u2462154512_Ultra-immersive_macro_perspective_moving_along_th_f392ba18-f102-4b67-8e8e-dd0bb783e650_0.png",
@@ -54,8 +54,8 @@ const PHASES = [
       }
     ],
     deliverables: [
-      "Brand Book completo (80+ páginas)",
-      "12 diseños de etiquetas únicos",
+      "Brand Book completo",
+      "Diseño de etiquetas únicos",
       "Manual de packaging y materiales",
       "Reporte de investigación de mercado",
       "Guía de compliance regulatorio Brasil"
@@ -317,13 +317,6 @@ export default function ProposalLanding() {
               >
                 Ver Propuesta
                 <ArrowRight size={18} />
-              </button>
-              <button 
-                onClick={() => scrollToSection("contacto")}
-                className="inline-flex items-center gap-3 border border-white/30 text-white px-8 py-4 text-sm uppercase tracking-[0.15em] hover:bg-white/10 transition-colors"
-                data-testid="hero-cta-secondary"
-              >
-                Comenzar Proyecto
               </button>
             </div>
           </div>
@@ -636,70 +629,9 @@ export default function ProposalLanding() {
             </div>
 
             <p className="text-white/50 max-w-xl mx-auto">
-              Complete el formulario y nuestro equipo se pondrá en contacto para agendar 
-              una sesión estratégica.
+              Contactanos para agendar una sesión estratégica y discutir los próximos pasos.
             </p>
           </div>
-
-          {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="space-y-8 section-animate" data-testid="contact-form">
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div>
-                <input
-                  type="text"
-                  placeholder="Nombre *"
-                  value={formData.nombre}
-                  onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                  className="w-full bg-transparent border-b border-white/20 focus:border-white text-white py-4 px-0 placeholder:text-white/30 outline-none transition-colors"
-                  data-testid="form-nombre"
-                />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Empresa *"
-                  value={formData.empresa}
-                  onChange={(e) => setFormData({ ...formData, empresa: e.target.value })}
-                  className="w-full bg-transparent border-b border-white/20 focus:border-white text-white py-4 px-0 placeholder:text-white/30 outline-none transition-colors"
-                  data-testid="form-empresa"
-                />
-              </div>
-            </div>
-            
-            <div>
-              <input
-                type="email"
-                placeholder="Email *"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-transparent border-b border-white/20 focus:border-white text-white py-4 px-0 placeholder:text-white/30 outline-none transition-colors"
-                data-testid="form-email"
-              />
-            </div>
-
-            <div>
-              <textarea
-                placeholder="Mensaje (opcional)"
-                value={formData.mensaje}
-                onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
-                rows={4}
-                className="w-full bg-transparent border-b border-white/20 focus:border-white text-white py-4 px-0 placeholder:text-white/30 outline-none transition-colors resize-none"
-                data-testid="form-mensaje"
-              />
-            </div>
-
-            <div className="pt-4 text-center">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="inline-flex items-center gap-3 bg-white text-black px-12 py-5 text-sm uppercase tracking-[0.15em] hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                data-testid="form-submit"
-              >
-                {isSubmitting ? "Enviando..." : "Comenzar Proyecto"}
-                {!isSubmitting && <ArrowRight size={18} />}
-              </button>
-            </div>
-          </form>
         </div>
       </section>
 
