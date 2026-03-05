@@ -1,0 +1,154 @@
+{
+  "project_name": "WTF_Agency_Wine_Proposal",
+  "design_philosophy": {
+    "identity": "E1: The Anti-AI Designer",
+    "core_principles": [
+      "Fusion over Imitation: Wine Heritage x Financial Precision",
+      "Emotion First: Trust, Exclusivity, Competence",
+      "Content is King: The proposal is a story, not a list",
+      "Negative Space: Luxury breathes"
+    ],
+    "anti_patterns": [
+      "No generic SaaS pricing tables",
+      "No default 'Inter' font for headings",
+      "No 'Bootstrap' equal-width columns without purpose",
+      "No standard gradients (use texture/noise)"
+    ]
+  },
+  "typography": {
+    "headings": {
+      "font_family": "Playfair Display, serif",
+      "weights": ["400", "600", "700"],
+      "usage": "All section titles, hero text, and big statements. Use italics for emphasis.",
+      "letter_spacing": "tracking-tight"
+    },
+    "body": {
+      "font_family": "Manrope, sans-serif",
+      "weights": ["300", "400", "500"],
+      "usage": "Paragraphs, lists, form inputs",
+      "letter_spacing": "tracking-normal"
+    },
+    "accents": {
+      "font_family": "Cormorant Garamond, serif",
+      "style": "italic",
+      "usage": "Subtitles, quotes, 'vs' markers, captions"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "name": "Merlot Deep",
+        "hex": "#4A0404",
+        "usage": "Primary buttons, active states, key backgrounds"
+      },
+      "secondary": {
+        "name": "Vintage Gold",
+        "hex": "#C5A059",
+        "usage": "Borders, icons, highlights, text selection"
+      },
+      "background": {
+        "name": "Premium Cream",
+        "hex": "#F9F8F4",
+        "usage": "Main page background (Paper feel)"
+      },
+      "surface": {
+        "name": "Dark Cellar",
+        "hex": "#1A1616",
+        "usage": "Footer, dark mode sections, cards"
+      },
+      "text": {
+        "primary": "#1A1A1A",
+        "secondary": "#595959",
+        "inverted": "#F9F8F4"
+      },
+      "brazil_accent": {
+        "name": "Amazon Deep",
+        "hex": "#1B4B36",
+        "usage": "Growth metrics, success indicators (Subtle)"
+      }
+    },
+    "gradients": {
+      "hero_overlay": "linear-gradient(to right, rgba(26,22,22,0.9), rgba(74,4,4,0.4))",
+      "gold_shimmer": "linear-gradient(45deg, #C5A059, #E5C585, #C5A059)"
+    }
+  },
+  "layout_strategies": {
+    "grid_system": "Bento Grid (Mode A) for Deliverables, Split Screen for Hero",
+    "spacing": "Generous. Minimum p-12 for sections. Gap-8 for grids.",
+    "container": "max-w-7xl mx-auto px-6"
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#4A0404] text-[#F9F8F4] hover:bg-[#2A0202] rounded-none px-8 py-4 font-serif uppercase tracking-widest text-sm border border-[#4A0404] transition-all duration-300 hover:tracking-[0.2em]",
+      "secondary": "bg-transparent text-[#4A0404] border border-[#4A0404] hover:bg-[#4A0404] hover:text-[#F9F8F4] rounded-none px-8 py-4 font-serif uppercase tracking-widest text-sm transition-all"
+    },
+    "cards": {
+      "style": "Flat, Cream background with thin Gold (#C5A059) border (1px). No shadow by default. Hover: shadow-2xl and slight lift.",
+      "methodology": "Glassmorphism with 'bottle glass' texture effect (backdrop-blur-md bg-white/10 border-white/20)"
+    },
+    "inputs": {
+      "style": "bg-transparent border-b border-[#4A0404]/30 focus:border-[#4A0404] focus:ring-0 rounded-none px-0 py-4 placeholder:text-[#4A0404]/40 font-serif"
+    }
+  },
+  "visual_enhancers": {
+    "textures": "Add a subtle 'noise' or 'paper grain' overlay to the #F9F8F4 background to avoid digital flatness.",
+    "timeline_style": "The 'Vine' Concept. A vertical SVG line that meanders like a grape vine. Nodes are 'grapes' or gold circles.",
+    "investment_display": "Design as a 'Financial Ledger' or 'Sommelier Menu'. Minimalist lines, serif numbers, right-aligned currency."
+  },
+  "motion": {
+    "library": "framer-motion",
+    "entrance": "Staggered fade-up for text. 'Draw' animation for the timeline SVG path.",
+    "scroll": "Parallax effect on background vineyard images."
+  },
+  "images": {
+    "hero_bg": {
+      "url": "https://images.unsplash.com/photo-1652284299342-21749ba9baa8",
+      "alt": "Luxury Wine Bottle Shadow",
+      "style": "Darkened, used as texture or split layout visual"
+    },
+    "brazil_market": {
+      "url": "https://images.unsplash.com/photo-1679661546557-3976bdf86c28",
+      "alt": "Rio de Janeiro Aerial",
+      "style": "Grayscale or Duotone (Burgundy tint) to blend with design"
+    },
+    "methodology_bg": {
+      "url": "https://images.unsplash.com/photo-1743184579851-5ec9972100b3",
+      "alt": "Gold Texture / Champagne",
+      "style": "Soft focus background"
+    },
+    "logos": {
+      "client": "Use placeholder 'Grupo Upper Blanc' serif typography if image missing",
+      "agency": "Use placeholder 'WTF Agency' bold sans if image missing"
+    }
+  },
+  "content_structure_instructions": {
+    "hero": {
+      "headline": "Desarrollo Integral Marca de Vinos para Brasil",
+      "subheadline": "De concepto a líder de mercado - USD 7,500/mes",
+      "layout": "Split: Left Text (Dark), Right Image (Vineyard/Bottle)"
+    },
+    "timeline": {
+      "title": "Roadmap de 12 Meses",
+      "style": "Vertical scrolling timeline with interactive hover states on milestones"
+    },
+    "investment": {
+      "title": "Propuesta de Inversión",
+      "highlight": "USD 90,000 Anual",
+      "breakdown": "USD 7,500 / mes",
+      "style": "High-contrast Typography. Big serif numbers."
+    },
+    "contact": {
+      "form_fields": ["Nombre", "Empresa", "Email", "Mensaje"],
+      "cta": "Comenzar Proyecto"
+    }
+  },
+  "universal_guidelines": [
+    "Do not use gradients for text.",
+    "Use 'Playfair Display' for all Headings (H1-H4).",
+    "Use 'Manrope' for body text.",
+    "Ensure 2x padding (p-12, p-16) between sections.",
+    "Interactive elements must have hover states (color shift or scale).",
+    "Use 'sonner' for toast notifications on form submit.",
+    "Responsive: Stack columns on mobile, generous margins."
+  ]
+}
