@@ -1,18 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --merlot-deep: #4A0404;
-  --vintage-gold: #C5A059;
-  --premium-cream: #F9F8F4;
-  --dark-cellar: #1A1616;
-  --amazon-deep: #1B4B36;
-  --text-primary: #1A1A1A;
-  --text-secondary: #595959;
-  --text-inverted: #F9F8F4;
+  --black: #000000;
+  --white: #ffffff;
 }
 
 * {
@@ -22,52 +16,28 @@
 }
 
 body {
-  font-family: 'Manrope', sans-serif;
-  background-color: var(--premium-cream);
-  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #000;
+  color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Paper texture overlay */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-h1, h2, h3, h4, h5, h6, .font-serif {
-  font-family: 'Playfair Display', serif;
-}
-
-.font-accent {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-}
-
-.font-body {
-  font-family: 'Manrope', sans-serif;
-}
-
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--premium-cream);
+  background: #000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--merlot-deep);
-  border-radius: 0;
+  background: #333;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
 }
 
 /* Smooth scroll */
@@ -77,8 +47,8 @@ html {
 
 /* Selection color */
 ::selection {
-  background: var(--vintage-gold);
-  color: var(--dark-cellar);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
 /* Custom animations */
@@ -93,15 +63,6 @@ html {
   }
 }
 
-@keyframes drawLine {
-  from {
-    stroke-dashoffset: 1000;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
 }
@@ -112,119 +73,61 @@ html {
 .animate-delay-400 { animation-delay: 0.4s; }
 .animate-delay-500 { animation-delay: 0.5s; }
 
-/* Timeline line animation */
-.timeline-line {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: drawLine 2s ease-out forwards;
+/* Section animation */
+.section-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
 }
 
-/* Button hover effects */
-.btn-primary {
-  background-color: var(--merlot-deep);
-  color: var(--text-inverted);
-  border: 1px solid var(--merlot-deep);
-  padding: 1rem 2rem;
-  font-family: 'Playfair Display', serif;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
+.section-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.btn-primary:hover {
-  background-color: #2A0202;
-  letter-spacing: 0.2em;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: var(--merlot-deep);
-  border: 1px solid var(--merlot-deep);
-  padding: 1rem 2rem;
-  font-family: 'Playfair Display', serif;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background-color: var(--merlot-deep);
-  color: var(--text-inverted);
-}
-
-/* Card styles */
-.card-wine {
-  background-color: var(--premium-cream);
-  border: 1px solid var(--vintage-gold);
-  transition: all 0.3s ease;
-}
-
-.card-wine:hover {
-  box-shadow: 0 25px 50px -12px rgba(74, 4, 4, 0.15);
-  transform: translateY(-4px);
-}
-
-/* Input styles */
-.input-wine {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(74, 4, 4, 0.3);
-  padding: 1rem 0;
-  font-family: 'Manrope', sans-serif;
-  transition: border-color 0.3s ease;
-}
-
-.input-wine:focus {
+/* Focus styles */
+input:focus, textarea:focus {
   outline: none;
-  border-bottom-color: var(--merlot-deep);
 }
 
-.input-wine::placeholder {
-  color: rgba(74, 4, 4, 0.4);
-}
-
-/* Gold shimmer effect */
-.gold-shimmer {
-  background: linear-gradient(45deg, #C5A059, #E5C585, #C5A059);
-  background-size: 200% 200%;
-  animation: shimmer 3s ease infinite;
-}
-
-@keyframes shimmer {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 100%;
+    --radius: 0;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 

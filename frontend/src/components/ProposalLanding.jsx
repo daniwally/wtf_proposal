@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "sonner";
 import { 
   Check, ChevronDown, ArrowRight, Target, Zap, Globe, 
-  Users, TrendingUp, Calendar, Award, Lightbulb, BarChart3,
-  Palette, Package, Megaphone, LineChart, Menu, X
+  Users, TrendingUp, Award, Lightbulb,
+  Palette, Package, Megaphone, LineChart, Menu, X,
+  Briefcase, BarChart2, Camera, ShoppingBag, FileText, Search
 } from "lucide-react";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -21,82 +22,142 @@ const ASSETS = {
   grapes3: "https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/qq7k0y6g_u2462154512_Ultra-immersive_macro_perspective_moving_along_th_f392ba18-f102-4b67-8e8e-dd0bb783e650_0.png",
 };
 
-// Phase data
+// Phase data with expanded scope
 const PHASES = [
   {
     id: 1,
     title: "Brand Development",
     subtitle: "Desarrollo de Marca",
-    duration: "3 meses",
-    total: "USD 22,500",
-    monthly: "USD 7,500/mes",
+    duration: "Meses 1-3",
     icon: Palette,
+    description: "Construcción de los cimientos estratégicos y visuales de tu marca de vinos. Desde la conceptualización hasta un sistema de identidad completo listo para conquistar el mercado brasileño.",
+    scope: [
+      {
+        title: "Naming & Arquitectura de Marca",
+        desc: "Desarrollo del nombre, tagline, propuesta de valor única y estructura de portfolio para posicionamiento premium en Brasil"
+      },
+      {
+        title: "Sistema de Identidad Visual",
+        desc: "Logo principal, variantes, paleta de colores, tipografía, iconografía y guidelines de uso completos"
+      },
+      {
+        title: "Diseño de Packaging",
+        desc: "3 líneas de producto con diseño de etiquetas, cápsulas, cajas y materiales POP diferenciados"
+      },
+      {
+        title: "Investigación de Mercado Brasil",
+        desc: "Análisis competitivo, mapeo de canales, perfil del consumidor brasileño y oportunidades de posicionamiento"
+      },
+      {
+        title: "Cumplimiento Regulatorio",
+        desc: "Guía de requisitos legales para comercialización de vinos en Brasil, etiquetado y certificaciones necesarias"
+      }
+    ],
     deliverables: [
-      "Naming + Arquitectura de Marca",
-      "Logo + Sistema de Identidad Visual",
-      "Diseño de Packaging (3 líneas de producto)",
-      "Investigación de Mercado Brasil",
-      "Análisis Competitivo",
-      "Cumplimiento Regulatorio Brasil"
+      "Brand Book completo (80+ páginas)",
+      "12 diseños de etiquetas únicos",
+      "Manual de packaging y materiales",
+      "Reporte de investigación de mercado",
+      "Guía de compliance regulatorio Brasil"
     ]
   },
   {
     id: 2,
     title: "Market Launch Brasil",
     subtitle: "Lanzamiento al Mercado",
-    duration: "3 meses",
-    total: "USD 22,500",
-    monthly: "USD 7,500/mes",
+    duration: "Meses 4-6",
     icon: Megaphone,
+    description: "Ejecución integral del lanzamiento en Brasil. Construimos tu presencia digital, creamos contenido premium y activamos campañas que generan awareness y demanda desde el día uno.",
+    scope: [
+      {
+        title: "Estrategia Go-to-Market 360°",
+        desc: "Plan de lanzamiento detallado con canales, timing, inversión publicitaria y KPIs de éxito"
+      },
+      {
+        title: "Plataforma Digital & E-commerce",
+        desc: "Website institucional + tienda online integrada con pasarelas de pago brasileñas y logística local"
+      },
+      {
+        title: "Producción de Contenido Premium",
+        desc: "Sesión fotográfica profesional, videos de marca, assets para redes sociales y materiales de venta"
+      },
+      {
+        title: "Campaña de Lanzamiento",
+        desc: "Activación en medios digitales, PR, eventos de presentación y sampling estratégico"
+      },
+      {
+        title: "Red de Influencers & Sommeliers",
+        desc: "Partnerships con líderes de opinión del mundo del vino en Brasil para amplificar el lanzamiento"
+      }
+    ],
     deliverables: [
-      "Estrategia Go-to-Market 360°",
-      "Plataforma Digital + E-commerce",
-      "Creación de Contenido + Sesión Fotográfica",
-      "Campaña de Lanzamiento",
-      "Partnerships con Influencers",
-      "Estrategia PR + Relaciones con Medios"
+      "Website + E-commerce funcionando",
+      "500+ assets de contenido",
+      "Video de marca (60s + cuts)",
+      "Campaña activa en medios",
+      "Red de 20+ influencers activada"
     ]
   },
   {
     id: 3,
     title: "Growth & Management",
     subtitle: "Crecimiento y Gestión",
-    duration: "6 meses",
-    total: "USD 45,000",
-    monthly: "USD 7,500/mes",
+    duration: "Meses 7-12",
     icon: LineChart,
+    description: "Gestión continua y optimización para escalar resultados. Monitoreamos performance, ajustamos estrategias y expandimos tu presencia para consolidar la marca en el mercado brasileño.",
+    scope: [
+      {
+        title: "Optimización de Campañas",
+        desc: "A/B testing continuo, optimización de audiencias, creatividades y pujas para maximizar ROAS"
+      },
+      {
+        title: "Gestión de Performance",
+        desc: "Monitoreo diario de KPIs, dashboards en tiempo real y reportes ejecutivos mensuales"
+      },
+      {
+        title: "Estrategia de Expansión",
+        desc: "Análisis de nuevos canales de distribución, regiones y oportunidades de crecimiento en Brasil"
+      },
+      {
+        title: "Desarrollo Continuo de Marca",
+        desc: "Evolución visual, nuevas líneas de producto, ediciones limitadas y colaboraciones especiales"
+      },
+      {
+        title: "Campañas Estacionales",
+        desc: "Activaciones para fechas clave: vendimia, fiestas, Día del Vino, eventos gastronómicos"
+      }
+    ],
     deliverables: [
-      "Optimización Continua de Campañas",
-      "Gestión de Performance",
-      "Estrategia de Expansión de Mercado",
-      "Desarrollo Continuo de Marca",
-      "Campañas Estacionales",
-      "Analytics + Reportes Mensuales"
+      "12 reportes de performance mensuales",
+      "Optimización continua de campañas",
+      "4 campañas estacionales",
+      "Plan de expansión año 2",
+      "Evolución de marca documentada"
     ]
   }
 ];
 
 // Timeline data
 const TIMELINE = [
-  { month: "1-3", label: "Brand Development", items: ["Naming", "Identidad", "Packaging"], color: "#4A0404" },
-  { month: "4-6", label: "Market Launch", items: ["Digital", "Campaña", "Contenido"], color: "#C5A059" },
-  { month: "7-12", label: "Growth Management", items: ["Optimización", "Expansión", "Performance"], color: "#1B4B36" }
+  { month: "1-3", label: "Brand Development", items: ["Naming", "Identidad", "Packaging", "Research"], color: "#000" },
+  { month: "4-6", label: "Market Launch", items: ["Digital", "Contenido", "Campaña", "PR"], color: "#000" },
+  { month: "7-12", label: "Growth", items: ["Optimización", "Expansión", "Performance"], color: "#000" }
 ];
 
 // Methodology items
 const METHODOLOGY = [
-  { icon: Zap, title: "AI-Powered", desc: "Sistema de desarrollo de marca impulsado por IA" },
-  { icon: Target, title: "85% Más Rápido", desc: "Que agencias tradicionales" },
-  { icon: Award, title: "Wine Expertise", desc: "Portfolio: Casillero del Diablo" },
-  { icon: Globe, title: "Brasil Office", desc: "Presencia en São Paulo" }
+  { icon: Zap, title: "AI-Powered", desc: "Sistema de desarrollo de marca impulsado por inteligencia artificial" },
+  { icon: Target, title: "85% Más Rápido", desc: "Que agencias tradicionales en tiempo de entrega" },
+  { icon: Award, title: "Wine Expertise", desc: "Portfolio incluye Casillero del Diablo y marcas premium" },
+  { icon: Globe, title: "Brasil Office", desc: "Equipo local en São Paulo para el mercado brasileño" }
 ];
 
 // Credentials
 const CREDENTIALS = [
-  { value: "15+", label: "Años de experiencia en industria del vino" },
+  { value: "15+", label: "Años en industria del vino" },
   { value: "50+", label: "Marcas desarrolladas" },
   { value: "8", label: "Mercados internacionales" },
-  { value: "360°", label: "Capacidad de ejecución end-to-end" }
+  { value: "360°", label: "Ejecución end-to-end" }
 ];
 
 export default function ProposalLanding() {
@@ -104,7 +165,6 @@ export default function ProposalLanding() {
   const [formData, setFormData] = useState({ nombre: "", empresa: "", email: "", mensaje: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const sectionsRef = useRef({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -149,25 +209,27 @@ export default function ProposalLanding() {
     setMobileMenuOpen(false);
   };
 
+  const currentPhase = PHASES.find(p => p.id === activePhase);
+
   return (
-    <div className="min-h-screen bg-[#F9F8F4]">
+    <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 nav-sticky" data-testid="navigation">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-white/10" data-testid="navigation">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <img 
-            src={ASSETS.logoWtfBlack} 
+            src={ASSETS.logoWtfWhite} 
             alt="WTF Agency" 
-            className="h-10 object-contain"
+            className="h-8 object-contain"
             data-testid="nav-logo"
           />
           
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            {["Fases", "Inversión", "Metodología", "Timeline", "Contacto"].map((item) => (
+            {["Proyecto", "Fases", "Metodología", "Equipo", "Contacto"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="text-sm font-body text-[#1A1A1A] hover:text-[#4A0404] transition-colors tracking-wide"
+                className="text-xs uppercase tracking-[0.2em] text-white/60 hover:text-white transition-colors"
                 data-testid={`nav-${item.toLowerCase()}`}
               >
                 {item}
@@ -187,12 +249,12 @@ export default function ProposalLanding() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#1A1616] text-white py-8 px-6">
-            {["Fases", "Inversión", "Metodología", "Timeline", "Contacto"].map((item) => (
+          <div className="md:hidden bg-black py-8 px-6 border-t border-white/10">
+            {["Proyecto", "Fases", "Metodología", "Equipo", "Contacto"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="block w-full text-left py-3 text-lg font-serif border-b border-white/10"
+                className="block w-full text-left py-3 text-sm uppercase tracking-[0.15em] text-white/60 hover:text-white border-b border-white/5"
                 data-testid={`mobile-nav-${item.toLowerCase()}`}
               >
                 {item}
@@ -202,389 +264,351 @@ export default function ProposalLanding() {
         )}
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - No prices */}
       <section className="relative min-h-screen flex items-center" data-testid="hero-section">
         <div className="absolute inset-0">
           <img 
             src={ASSETS.vineyard2} 
             alt="Vineyard" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-40"
           />
-          <div className="absolute inset-0 hero-overlay" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black" />
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-white">
-            {/* Logos */}
-            <div className="flex items-center gap-6 mb-12 opacity-0 animate-fade-in-up">
-              <img src={ASSETS.logoWtfWhite} alt="WTF Agency" className="h-14" data-testid="hero-wtf-logo" />
-              <div className="w-px h-12 bg-[#C5A059]" />
-              <div className="logo-placeholder text-[#C5A059] text-xl" data-testid="hero-client-logo">
-                GRUPO UPPER BLANC
-              </div>
-            </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 w-full">
+          {/* Logos */}
+          <div className="flex items-center gap-6 mb-16 opacity-0 animate-fade-in-up">
+            <img src={ASSETS.logoWtfWhite} alt="WTF Agency" className="h-12" data-testid="hero-wtf-logo" />
+            <div className="w-px h-10 bg-white/30" />
+            <span className="text-white/60 text-sm uppercase tracking-[0.2em]" data-testid="hero-client-logo">
+              Grupo Upper Blanc
+            </span>
+          </div>
 
-            {/* Headline */}
+          {/* Headline */}
+          <div className="max-w-4xl">
+            <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6 opacity-0 animate-fade-in-up">
+              Propuesta de Proyecto
+            </p>
             <h1 
-              className="font-serif text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6 opacity-0 animate-fade-in-up animate-delay-100"
+              className="text-5xl sm:text-6xl lg:text-7xl font-light leading-[1.1] mb-8 opacity-0 animate-fade-in-up animate-delay-100"
               data-testid="hero-headline"
             >
               Desarrollo Integral<br />
-              <span className="text-[#C5A059]">Marca de Vinos</span><br />
-              para Brasil
+              <span className="font-normal">Marca de Vinos</span><br />
+              <span className="text-white/50">para Brasil</span>
             </h1>
 
             {/* Subheadline */}
             <p 
-              className="font-accent text-xl sm:text-2xl text-[#C5A059] mb-8 opacity-0 animate-fade-in-up animate-delay-200"
+              className="text-xl text-white/60 max-w-xl mb-12 opacity-0 animate-fade-in-up animate-delay-200"
               data-testid="hero-subheadline"
             >
-              De concepto a líder de mercado
+              De concepto a líder de mercado. Naming, identidad, packaging, 
+              lanzamiento digital y gestión continua.
             </p>
 
-            {/* Price Badge */}
-            <div className="inline-flex items-center gap-4 bg-white/10 backdrop-blur-sm border border-[#C5A059]/30 px-6 py-4 mb-10 opacity-0 animate-fade-in-up animate-delay-300">
-              <span className="font-body text-sm text-white/70 uppercase tracking-wider">Tarifa Mensual</span>
-              <span className="font-serif text-3xl text-white" data-testid="hero-price">USD 7,500</span>
-            </div>
-
             {/* CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up animate-delay-400">
+            <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up animate-delay-300">
               <button 
-                onClick={() => scrollToSection("contacto")}
-                className="btn-primary flex items-center justify-center gap-2"
+                onClick={() => scrollToSection("fases")}
+                className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 text-sm uppercase tracking-[0.15em] hover:bg-white/90 transition-colors"
                 data-testid="hero-cta-primary"
               >
-                Comenzar Proyecto
+                Ver Propuesta
                 <ArrowRight size={18} />
               </button>
               <button 
-                onClick={() => scrollToSection("fases")}
-                className="btn-secondary"
+                onClick={() => scrollToSection("contacto")}
+                className="inline-flex items-center gap-3 border border-white/30 text-white px-8 py-4 text-sm uppercase tracking-[0.15em] hover:bg-white/10 transition-colors"
                 data-testid="hero-cta-secondary"
               >
-                Ver Propuesta
+                Comenzar Proyecto
               </button>
-            </div>
-          </div>
-
-          {/* Right side decorative element */}
-          <div className="hidden lg:block">
-            <div className="relative">
-              <div className="absolute -top-10 -right-10 w-64 h-64 border border-[#C5A059]/30 rotate-45" />
-              <div className="relative bg-[#1A1616]/50 backdrop-blur-sm p-8 border border-[#C5A059]/30">
-                <p className="font-accent text-lg text-[#C5A059] mb-4">Inversión Anual</p>
-                <p className="font-serif text-5xl text-white mb-2" data-testid="hero-annual-total">USD 90,000</p>
-                <p className="font-body text-sm text-white/60">Programa de 12 meses</p>
-              </div>
             </div>
           </div>
         </div>
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <ChevronDown className="text-[#C5A059]" size={32} />
+          <ChevronDown className="text-white/40" size={32} />
         </div>
       </section>
 
-      {/* Phases Section */}
-      <section id="fases" className="py-24 px-6" data-testid="phases-section">
+      {/* Project Overview */}
+      <section id="proyecto" className="py-32 px-6 bg-black" data-testid="project-section">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 section-animate">
-            <p className="font-accent text-[#C5A059] text-lg mb-4">Estructura del Proyecto</p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#1A1A1A] mb-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <div className="section-animate">
+              <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">El Proyecto</p>
+              <h2 className="text-4xl lg:text-5xl font-light mb-8">
+                Construir una marca de vinos que conquiste Brasil
+              </h2>
+              <p className="text-white/60 text-lg leading-relaxed mb-8">
+                Un programa de 12 meses para desarrollar, lanzar y escalar tu marca 
+                de vinos en el mercado brasileño. Desde la creación del nombre hasta 
+                la gestión continua de campañas y expansión.
+              </p>
+              <div className="flex items-center gap-8">
+                <div>
+                  <p className="text-3xl font-light">12</p>
+                  <p className="text-white/40 text-sm uppercase tracking-wider">Meses</p>
+                </div>
+                <div className="w-px h-12 bg-white/20" />
+                <div>
+                  <p className="text-3xl font-light">3</p>
+                  <p className="text-white/40 text-sm uppercase tracking-wider">Fases</p>
+                </div>
+                <div className="w-px h-12 bg-white/20" />
+                <div>
+                  <p className="text-3xl font-light">360°</p>
+                  <p className="text-white/40 text-sm uppercase tracking-wider">Alcance</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="section-animate">
+              <div className="relative">
+                <img 
+                  src={ASSETS.grapes1} 
+                  alt="Premium wine" 
+                  className="w-full aspect-[4/3] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Phases Section - Detailed scope, no prices */}
+      <section id="fases" className="py-32 px-6 bg-zinc-950" data-testid="phases-section">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-16 section-animate">
+            <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Alcance del Proyecto</p>
+            <h2 className="text-4xl lg:text-5xl font-light">
               Fases del Proyecto
             </h2>
-            <div className="section-divider mx-auto" />
           </div>
 
-          {/* Phase Selector */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {PHASES.map((phase) => {
-              const Icon = phase.icon;
-              return (
-                <button
-                  key={phase.id}
-                  onClick={() => setActivePhase(phase.id)}
-                  className={`phase-card card-wine p-8 text-left transition-all ${
-                    activePhase === phase.id ? "active shadow-xl" : ""
-                  }`}
-                  data-testid={`phase-card-${phase.id}`}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className={`p-3 ${activePhase === phase.id ? "bg-[#4A0404]" : "bg-[#C5A059]/10"} transition-colors`}>
-                      <Icon className={activePhase === phase.id ? "text-white" : "text-[#4A0404]"} size={24} />
-                    </div>
-                    <span className="font-accent text-[#595959]">{phase.duration}</span>
-                  </div>
-                  <p className="font-body text-sm text-[#C5A059] uppercase tracking-wider mb-2">Fase {phase.id}</p>
-                  <h3 className="font-serif text-xl text-[#1A1A1A] mb-1">{phase.title}</h3>
-                  <p className="font-accent text-[#595959] mb-4">{phase.subtitle}</p>
-                  <div className="pt-4 border-t border-[#C5A059]/20">
-                    <p className="font-serif text-2xl text-[#4A0404]">{phase.total}</p>
-                    <p className="font-body text-sm text-[#595959]">{phase.monthly}</p>
-                  </div>
-                </button>
-              );
-            })}
+          {/* Phase Tabs */}
+          <div className="flex flex-wrap gap-4 mb-12 section-animate">
+            {PHASES.map((phase) => (
+              <button
+                key={phase.id}
+                onClick={() => setActivePhase(phase.id)}
+                className={`px-6 py-3 text-sm uppercase tracking-[0.15em] border transition-all ${
+                  activePhase === phase.id 
+                    ? "bg-white text-black border-white" 
+                    : "bg-transparent text-white/60 border-white/20 hover:border-white/40"
+                }`}
+                data-testid={`phase-tab-${phase.id}`}
+              >
+                Fase {phase.id}: {phase.title}
+              </button>
+            ))}
           </div>
 
-          {/* Deliverables for Active Phase */}
-          <div className="bg-[#1A1616] p-8 lg:p-12 section-animate" data-testid="phase-deliverables">
-            <div className="grid lg:grid-cols-2 gap-8">
-              <div>
-                <p className="font-accent text-[#C5A059] text-lg mb-2">
-                  Fase {activePhase}: {PHASES[activePhase - 1].title}
-                </p>
-                <h3 className="font-serif text-2xl lg:text-3xl text-white mb-6">
-                  Entregables Incluidos
-                </h3>
-                <p className="font-body text-white/60 leading-relaxed">
-                  Cada fase incluye todos los entregables necesarios para alcanzar los objetivos establecidos, 
-                  con revisiones ilimitadas y soporte dedicado.
-                </p>
-              </div>
-              <div className="space-y-4">
-                {PHASES[activePhase - 1].deliverables.map((item, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="p-1 bg-[#C5A059] mt-1">
-                      <Check className="text-[#1A1616]" size={14} />
-                    </div>
-                    <span className="font-body text-white/80">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Investment Section */}
-      <section id="inversión" className="py-24 px-6 bg-[#1A1616]" data-testid="investment-section">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="section-animate">
-              <p className="font-accent text-[#C5A059] text-lg mb-4">Propuesta de Inversión</p>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white mb-8">
-                Estructura de Inversión
-              </h2>
-              
-              <div className="space-y-8">
-                <div className="border-l-2 border-[#C5A059] pl-6">
-                  <p className="font-body text-sm text-white/60 uppercase tracking-wider mb-2">Tarifa Mensual</p>
-                  <p className="font-serif text-5xl text-white" data-testid="investment-monthly">USD 7,500</p>
-                </div>
-                
-                <div className="border-l-2 border-[#C5A059]/50 pl-6">
-                  <p className="font-body text-sm text-white/60 uppercase tracking-wider mb-2">Inversión Anual Total</p>
-                  <p className="font-serif text-4xl text-[#C5A059]" data-testid="investment-annual">USD 90,000</p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-6 pt-8 border-t border-white/10">
-                  <div>
-                    <p className="font-body text-white/60 text-sm mb-1">Duración</p>
-                    <p className="font-serif text-xl text-white">12 meses</p>
-                  </div>
-                  <div>
-                    <p className="font-body text-white/60 text-sm mb-1">Facturación</p>
-                    <p className="font-serif text-xl text-white">Mensual</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="section-animate">
-              <div className="space-y-6">
-                {[
-                  { label: "Sin costos de setup", desc: "Todo incluido en la tarifa mensual" },
-                  { label: "Sin tarifas ocultas", desc: "Precio transparente y predecible" },
-                  { label: "Términos flexibles", desc: "Opciones de pago disponibles" },
-                  { label: "Todos los entregables", desc: "Incluidos en cada fase" }
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 p-6 bg-white/5 border border-white/10">
-                    <div className="p-2 bg-[#1B4B36]">
-                      <Check className="text-white" size={16} />
+          {/* Active Phase Content */}
+          {currentPhase && (
+            <div className="grid lg:grid-cols-5 gap-12 section-animate" data-testid="phase-content">
+              {/* Left: Phase Info */}
+              <div className="lg:col-span-2">
+                <div className="sticky top-32">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-4 bg-white/5 border border-white/10">
+                      <currentPhase.icon className="text-white" size={28} />
                     </div>
                     <div>
-                      <p className="font-serif text-lg text-white mb-1">{item.label}</p>
-                      <p className="font-body text-sm text-white/60">{item.desc}</p>
+                      <p className="text-white/40 text-sm uppercase tracking-wider">{currentPhase.duration}</p>
+                      <h3 className="text-2xl font-light">{currentPhase.title}</h3>
+                    </div>
+                  </div>
+                  
+                  <p className="text-white/60 text-lg leading-relaxed mb-8">
+                    {currentPhase.description}
+                  </p>
+
+                  {/* Deliverables */}
+                  <div className="bg-white/5 border border-white/10 p-6">
+                    <p className="text-white/40 text-xs uppercase tracking-[0.2em] mb-4">Entregables</p>
+                    <div className="space-y-3">
+                      {currentPhase.deliverables.map((item, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                          <Check className="text-white/40 mt-0.5 flex-shrink-0" size={16} />
+                          <span className="text-white/80 text-sm">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: Scope Details */}
+              <div className="lg:col-span-3 space-y-6">
+                {currentPhase.scope.map((item, i) => (
+                  <div 
+                    key={i} 
+                    className="p-6 bg-white/[0.02] border border-white/10 hover:bg-white/[0.05] transition-colors"
+                  >
+                    <div className="flex items-start gap-4">
+                      <span className="text-white/20 text-sm font-mono">{String(i + 1).padStart(2, '0')}</span>
+                      <div>
+                        <h4 className="text-lg font-medium mb-2">{item.title}</h4>
+                        <p className="text-white/50 leading-relaxed">{item.desc}</p>
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Methodology Section */}
-      <section id="metodología" className="py-24 px-6 relative overflow-hidden" data-testid="methodology-section">
-        <div className="absolute inset-0 opacity-10">
-          <img src={ASSETS.grapes1} alt="" className="w-full h-full object-cover" />
-        </div>
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16 section-animate">
-            <p className="font-accent text-[#C5A059] text-lg mb-4">Nuestra Metodología</p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#1A1A1A] mb-6">
-              Metodología WTF
-            </h2>
-            <div className="section-divider mx-auto" />
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {METHODOLOGY.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div 
-                  key={i} 
-                  className="card-wine p-8 text-center section-animate"
-                  style={{ animationDelay: `${i * 0.1}s` }}
-                >
-                  <div className="w-16 h-16 mx-auto mb-6 bg-[#4A0404] flex items-center justify-center">
-                    <Icon className="text-[#C5A059]" size={28} />
-                  </div>
-                  <h3 className="font-serif text-xl text-[#1A1A1A] mb-2">{item.title}</h3>
-                  <p className="font-body text-sm text-[#595959]">{item.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Portfolio mention */}
-          <div className="mt-16 text-center section-animate">
-            <p className="font-accent text-[#595959] text-lg">
-              Portfolio incluye trabajo con <span className="text-[#4A0404] font-semibold">Casillero del Diablo</span>, 
-              <span className="text-[#4A0404] font-semibold"> Absolut</span> y más de 50 marcas premium
-            </p>
-          </div>
+          )}
         </div>
       </section>
 
       {/* Timeline Section */}
-      <section id="timeline" className="py-24 px-6 bg-[#F9F8F4]" data-testid="timeline-section">
+      <section className="py-32 px-6 bg-black" data-testid="timeline-section">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 section-animate">
-            <p className="font-accent text-[#C5A059] text-lg mb-4">Planificación</p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#1A1A1A] mb-6">
-              Roadmap de 12 Meses
+            <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Planificación</p>
+            <h2 className="text-4xl lg:text-5xl font-light">
+              Roadmap 12 Meses
             </h2>
-            <div className="section-divider mx-auto" />
           </div>
 
-          {/* Desktop Timeline */}
-          <div className="hidden lg:block relative">
-            {/* Timeline line */}
-            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[#C5A059]/30 -translate-y-1/2" />
-            
-            <div className="grid grid-cols-3 gap-8">
-              {TIMELINE.map((phase, i) => (
-                <div key={i} className="relative section-animate" style={{ animationDelay: `${i * 0.2}s` }}>
-                  {/* Node */}
-                  <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
-                    <div 
-                      className="w-6 h-6 rounded-full border-4 border-[#F9F8F4]"
-                      style={{ backgroundColor: phase.color }}
-                    />
+          {/* Timeline */}
+          <div className="relative section-animate">
+            {/* Desktop Timeline */}
+            <div className="hidden lg:block">
+              <div className="flex items-center justify-between mb-8">
+                {TIMELINE.map((phase, i) => (
+                  <div key={i} className="flex-1 text-center">
+                    <p className="text-white/40 text-sm uppercase tracking-wider mb-2">Meses {phase.month}</p>
+                    <h3 className="text-xl font-light mb-4">{phase.label}</h3>
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {phase.items.map((item, j) => (
+                        <span key={j} className="text-xs text-white/40 bg-white/5 px-3 py-1">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  
-                  {/* Card */}
-                  <div className="pt-8 text-center">
-                    <div className="card-wine p-8">
-                      <p className="font-body text-sm text-[#C5A059] uppercase tracking-wider mb-2">
-                        Meses {phase.month}
-                      </p>
-                      <h3 className="font-serif text-xl text-[#1A1A1A] mb-4">{phase.label}</h3>
-                      <div className="space-y-2">
-                        {phase.items.map((item, j) => (
-                          <p key={j} className="font-body text-sm text-[#595959]">{item}</p>
-                        ))}
-                      </div>
+                ))}
+              </div>
+              {/* Progress bar */}
+              <div className="h-px bg-white/10 relative">
+                <div className="absolute top-1/2 -translate-y-1/2 left-0 w-1/4 h-1 bg-white" />
+                <div className="absolute top-1/2 -translate-y-1/2 left-0 w-3 h-3 bg-white rounded-full" />
+                <div className="absolute top-1/2 -translate-y-1/2 left-1/3 w-3 h-3 bg-white/30 rounded-full -translate-x-1/2" />
+                <div className="absolute top-1/2 -translate-y-1/2 left-2/3 w-3 h-3 bg-white/30 rounded-full -translate-x-1/2" />
+                <div className="absolute top-1/2 -translate-y-1/2 right-0 w-3 h-3 bg-white/30 rounded-full" />
+              </div>
+            </div>
+
+            {/* Mobile Timeline */}
+            <div className="lg:hidden space-y-8">
+              {TIMELINE.map((phase, i) => (
+                <div key={i} className="flex gap-6">
+                  <div className="flex flex-col items-center">
+                    <div className="w-3 h-3 bg-white rounded-full" />
+                    {i < TIMELINE.length - 1 && <div className="w-px flex-1 bg-white/20" />}
+                  </div>
+                  <div className="pb-8">
+                    <p className="text-white/40 text-sm uppercase tracking-wider mb-1">Meses {phase.month}</p>
+                    <h3 className="text-lg font-light mb-3">{phase.label}</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {phase.items.map((item, j) => (
+                        <span key={j} className="text-xs text-white/40 bg-white/5 px-3 py-1">
+                          {item}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Mobile Timeline */}
-          <div className="lg:hidden space-y-6">
-            {TIMELINE.map((phase, i) => (
-              <div key={i} className="flex gap-6 section-animate">
-                <div className="flex flex-col items-center">
-                  <div 
-                    className="w-4 h-4 rounded-full"
-                    style={{ backgroundColor: phase.color }}
-                  />
-                  {i < TIMELINE.length - 1 && (
-                    <div className="w-0.5 flex-1 bg-[#C5A059]/30" />
-                  )}
-                </div>
-                <div className="card-wine p-6 flex-1 mb-4">
-                  <p className="font-body text-sm text-[#C5A059] uppercase tracking-wider mb-1">
-                    Meses {phase.month}
-                  </p>
-                  <h3 className="font-serif text-lg text-[#1A1A1A] mb-3">{phase.label}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {phase.items.map((item, j) => (
-                      <span key={j} className="font-body text-xs text-[#595959] bg-[#C5A059]/10 px-3 py-1">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+      {/* Methodology Section */}
+      <section id="metodología" className="py-32 px-6 bg-zinc-950" data-testid="methodology-section">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="section-animate">
+              <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Cómo Trabajamos</p>
+              <h2 className="text-4xl lg:text-5xl font-light mb-8">
+                Metodología WTF
+              </h2>
+              <p className="text-white/60 text-lg leading-relaxed mb-12">
+                Combinamos inteligencia artificial con 15 años de experiencia en la industria 
+                del vino para entregar resultados extraordinarios en tiempo récord.
+              </p>
+
+              <div className="grid grid-cols-2 gap-6">
+                {METHODOLOGY.map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={i} className="p-6 bg-white/[0.02] border border-white/10">
+                      <Icon className="text-white/60 mb-4" size={24} />
+                      <h3 className="text-lg font-medium mb-2">{item.title}</h3>
+                      <p className="text-white/40 text-sm">{item.desc}</p>
+                    </div>
+                  );
+                })}
               </div>
-            ))}
+            </div>
+
+            <div className="section-animate">
+              <img 
+                src={ASSETS.grapes2} 
+                alt="Wine methodology" 
+                className="w-full aspect-square object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Team Credentials Section */}
-      <section className="py-24 px-6 bg-[#1A1616]" data-testid="credentials-section">
+      <section id="equipo" className="py-32 px-6 bg-black" data-testid="credentials-section">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="section-animate">
-              <div className="relative">
-                <img 
-                  src={ASSETS.grapes3} 
-                  alt="Wine expertise" 
-                  className="w-full aspect-square object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1616] to-transparent" />
-              </div>
+            <div className="order-2 lg:order-1 section-animate">
+              <img 
+                src={ASSETS.grapes3} 
+                alt="Wine expertise" 
+                className="w-full aspect-square object-cover"
+              />
             </div>
 
-            <div className="section-animate">
-              <p className="font-accent text-[#C5A059] text-lg mb-4">Credenciales del Equipo</p>
-              <h2 className="font-serif text-3xl sm:text-4xl text-white mb-8">
-                Experiencia que Respalda
+            <div className="order-1 lg:order-2 section-animate">
+              <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">El Equipo</p>
+              <h2 className="text-4xl lg:text-5xl font-light mb-8">
+                Credenciales
               </h2>
 
-              <div className="grid grid-cols-2 gap-8 mb-8">
+              <div className="grid grid-cols-2 gap-8 mb-12">
                 {CREDENTIALS.map((cred, i) => (
                   <div key={i}>
-                    <p className="font-serif text-4xl text-[#C5A059] mb-2">{cred.value}</p>
-                    <p className="font-body text-sm text-white/60">{cred.label}</p>
+                    <p className="text-4xl font-light mb-2">{cred.value}</p>
+                    <p className="text-white/40 text-sm">{cred.label}</p>
                   </div>
                 ))}
               </div>
 
               <div className="space-y-4 pt-8 border-t border-white/10">
                 <div className="flex items-center gap-4">
-                  <Award className="text-[#C5A059]" size={20} />
-                  <span className="font-body text-white/80">Portfolio: Casillero del Diablo, Absolut, +50 marcas</span>
+                  <Award className="text-white/40" size={20} />
+                  <span className="text-white/70">Portfolio: Casillero del Diablo, Absolut, +50 marcas</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Globe className="text-[#C5A059]" size={20} />
-                  <span className="font-body text-white/80">Oficina en São Paulo para mercado brasileño</span>
+                  <Globe className="text-white/40" size={20} />
+                  <span className="text-white/70">Oficina en São Paulo para mercado brasileño</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Users className="text-[#C5A059]" size={20} />
-                  <span className="font-body text-white/80">Especialista dedicado en industria del vino</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <Lightbulb className="text-[#C5A059]" size={20} />
-                  <span className="font-body text-white/80">Sistema creativo AI-powered</span>
+                  <Users className="text-white/40" size={20} />
+                  <span className="text-white/70">Especialista dedicado en industria del vino</span>
                 </div>
               </div>
             </div>
@@ -592,77 +616,33 @@ export default function ProposalLanding() {
         </div>
       </section>
 
-      {/* Deliverables Summary Section */}
-      <section className="py-24 px-6" data-testid="deliverables-section">
-        <div className="max-w-7xl mx-auto">
+      {/* Contact CTA Section - Investment here */}
+      <section id="contacto" className="py-32 px-6 bg-zinc-950" data-testid="contact-section">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16 section-animate">
-            <p className="font-accent text-[#C5A059] text-lg mb-4">Resumen Completo</p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#1A1A1A] mb-6">
-              Entregables por Fase
+            <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Inversión</p>
+            <h2 className="text-4xl lg:text-5xl font-light mb-8">
+              Comenzar el Proyecto
             </h2>
-            <div className="section-divider mx-auto" />
-          </div>
+            
+            {/* Investment Display */}
+            <div className="inline-flex flex-col items-center p-8 bg-white/[0.02] border border-white/10 mb-8">
+              <p className="text-white/40 text-sm uppercase tracking-[0.2em] mb-4">Fee Mensual</p>
+              <p className="text-5xl lg:text-6xl font-light mb-2" data-testid="investment-monthly">USD 7,500</p>
+              <p className="text-white/40">Programa de 12 meses</p>
+              <div className="w-16 h-px bg-white/20 my-6" />
+              <p className="text-white/40 text-sm uppercase tracking-[0.2em] mb-2">Inversión Total Anual</p>
+              <p className="text-2xl font-light" data-testid="investment-annual">USD 90,000</p>
+            </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {PHASES.map((phase, i) => {
-              const Icon = phase.icon;
-              return (
-                <div 
-                  key={phase.id} 
-                  className="card-wine p-8 section-animate"
-                  style={{ animationDelay: `${i * 0.1}s` }}
-                  data-testid={`deliverables-phase-${phase.id}`}
-                >
-                  <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[#C5A059]/20">
-                    <div className="p-3 bg-[#4A0404]">
-                      <Icon className="text-[#C5A059]" size={24} />
-                    </div>
-                    <div>
-                      <p className="font-body text-sm text-[#C5A059] uppercase tracking-wider">Fase {phase.id}</p>
-                      <h3 className="font-serif text-xl text-[#1A1A1A]">{phase.title}</h3>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-3 mb-6">
-                    {phase.deliverables.map((item, j) => (
-                      <div key={j} className="flex items-start gap-3">
-                        <Check className="text-[#1B4B36] mt-0.5 flex-shrink-0" size={16} />
-                        <span className="font-body text-sm text-[#595959]">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-6 border-t border-[#C5A059]/20">
-                    <p className="font-body text-sm text-[#595959]">{phase.duration}</p>
-                    <p className="font-serif text-2xl text-[#4A0404]">{phase.total}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact CTA Section */}
-      <section id="contacto" className="py-24 px-6 bg-[#1A1616] relative overflow-hidden" data-testid="contact-section">
-        <div className="absolute inset-0 opacity-5">
-          <img src={ASSETS.vineyard1} alt="" className="w-full h-full object-cover" />
-        </div>
-
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div className="text-center mb-12 section-animate">
-            <p className="font-accent text-[#C5A059] text-lg mb-4">Comenzar</p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
-              ¿Listo para Comenzar?
-            </h2>
-            <p className="font-body text-white/60 max-w-2xl mx-auto">
+            <p className="text-white/50 max-w-xl mx-auto">
               Complete el formulario y nuestro equipo se pondrá en contacto para agendar 
-              una sesión estratégica y discutir los próximos pasos.
+              una sesión estratégica.
             </p>
           </div>
 
           {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="space-y-6 section-animate" data-testid="contact-form">
+          <form onSubmit={handleSubmit} className="space-y-8 section-animate" data-testid="contact-form">
             <div className="grid sm:grid-cols-2 gap-6">
               <div>
                 <input
@@ -670,7 +650,7 @@ export default function ProposalLanding() {
                   placeholder="Nombre *"
                   value={formData.nombre}
                   onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                  className="w-full bg-transparent border-b border-white/30 focus:border-[#C5A059] text-white py-4 px-0 font-body placeholder:text-white/40 outline-none transition-colors"
+                  className="w-full bg-transparent border-b border-white/20 focus:border-white text-white py-4 px-0 placeholder:text-white/30 outline-none transition-colors"
                   data-testid="form-nombre"
                 />
               </div>
@@ -680,7 +660,7 @@ export default function ProposalLanding() {
                   placeholder="Empresa *"
                   value={formData.empresa}
                   onChange={(e) => setFormData({ ...formData, empresa: e.target.value })}
-                  className="w-full bg-transparent border-b border-white/30 focus:border-[#C5A059] text-white py-4 px-0 font-body placeholder:text-white/40 outline-none transition-colors"
+                  className="w-full bg-transparent border-b border-white/20 focus:border-white text-white py-4 px-0 placeholder:text-white/30 outline-none transition-colors"
                   data-testid="form-empresa"
                 />
               </div>
@@ -692,7 +672,7 @@ export default function ProposalLanding() {
                 placeholder="Email *"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-transparent border-b border-white/30 focus:border-[#C5A059] text-white py-4 px-0 font-body placeholder:text-white/40 outline-none transition-colors"
+                className="w-full bg-transparent border-b border-white/20 focus:border-white text-white py-4 px-0 placeholder:text-white/30 outline-none transition-colors"
                 data-testid="form-email"
               />
             </div>
@@ -703,31 +683,20 @@ export default function ProposalLanding() {
                 value={formData.mensaje}
                 onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
                 rows={4}
-                className="w-full bg-transparent border-b border-white/30 focus:border-[#C5A059] text-white py-4 px-0 font-body placeholder:text-white/40 outline-none transition-colors resize-none"
+                className="w-full bg-transparent border-b border-white/20 focus:border-white text-white py-4 px-0 placeholder:text-white/30 outline-none transition-colors resize-none"
                 data-testid="form-mensaje"
               />
             </div>
 
-            <div className="pt-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
-              <div className="text-center sm:text-left">
-                <p className="font-body text-sm text-white/60">Tarifa mensual desde</p>
-                <p className="font-serif text-2xl text-[#C5A059]">USD 7,500/mes</p>
-              </div>
-              
+            <div className="pt-4 text-center">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-3 bg-white text-black px-12 py-5 text-sm uppercase tracking-[0.15em] hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 data-testid="form-submit"
               >
-                {isSubmitting ? (
-                  "Enviando..."
-                ) : (
-                  <>
-                    Comenzar Proyecto
-                    <ArrowRight size={18} />
-                  </>
-                )}
+                {isSubmitting ? "Enviando..." : "Comenzar Proyecto"}
+                {!isSubmitting && <ArrowRight size={18} />}
               </button>
             </div>
           </form>
@@ -735,18 +704,18 @@ export default function ProposalLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 bg-[#0F0F0F]" data-testid="footer">
+      <footer className="py-12 px-6 bg-black border-t border-white/10" data-testid="footer">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <img src={ASSETS.logoWtfWhite} alt="WTF Agency" className="h-10" />
+            <img src={ASSETS.logoWtfWhite} alt="WTF Agency" className="h-8" />
             
-            <p className="font-body text-sm text-white/40">
+            <p className="text-white/30 text-sm">
               © 2024 WTF Agency. Brief Destroyers.
             </p>
 
-            <div className="flex items-center gap-6">
-              <span className="font-body text-sm text-white/60">Propuesta para</span>
-              <span className="font-serif text-[#C5A059]">Grupo Upper Blanc</span>
+            <div className="flex items-center gap-4">
+              <span className="text-white/30 text-sm">Propuesta para</span>
+              <span className="text-white/60">Grupo Upper Blanc</span>
             </div>
           </div>
         </div>
