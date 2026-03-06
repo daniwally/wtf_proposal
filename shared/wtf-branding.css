@@ -1,0 +1,175 @@
+/* WTF Agency - Brand Guidelines */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;700;900&display=swap');
+
+:root {
+  --wtf-black: #000000;
+  --wtf-white: #ffffff;
+  --wtf-gray-light: #f8f8f8;
+  --wtf-gray-dark: #333333;
+  --wtf-accent: #ff0000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--wtf-black);
+  background: var(--wtf-white);
+}
+
+/* Headers - Inter Thin + Bold combination */
+h1, h2, h3 {
+  font-weight: 100; /* Thin */
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+
+/* WTF Agency Header */
+.wtf-header {
+  padding: 2rem;
+  background: var(--wtf-black);
+  color: var(--wtf-white);
+  text-align: center;
+}
+
+.wtf-logo {
+  font-weight: 900; /* Bold */
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.wtf-tagline {
+  font-weight: 100; /* Thin */
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+/* Content Sections */
+.section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section:nth-child(even) {
+  background: var(--wtf-gray-light);
+}
+
+/* Pricing Table */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.pricing-tier {
+  background: var(--wtf-white);
+  border: 1px solid var(--wtf-gray-dark);
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.pricing-tier:hover {
+  transform: translateY(-5px);
+}
+
+.tier-name {
+  font-weight: 900;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.tier-price {
+  font-weight: 100;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Timeline */
+.timeline-item {
+  border-left: 2px solid var(--wtf-black);
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--wtf-black);
+  border-radius: 50%;
+}
+
+.timeline-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Contact Section */
+.contact {
+  text-align: center;
+  background: var(--wtf-black);
+  color: var(--wtf-white);
+}
+
+.contact-email {
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: var(--wtf-white);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.contact-email:hover {
+  border-bottom: 1px solid var(--wtf-white);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem 1rem;
+  }
+  
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Editorial/Fashion aesthetic */
+.editorial-spacing {
+  margin: 6rem 0;
+}
+
+.fashion-divider {
+  width: 100px;
+  height: 1px;
+  background: var(--wtf-black);
+  margin: 3rem auto;
+}

@@ -1,0 +1,82 @@
+/* Wine Industry - Client Specific Styles */
+
+/* Wine-themed color palette */
+:root {
+  --wine-burgundy: #722f37;
+  --wine-gold: #d4af37;
+  --wine-cream: #f5f5dc;
+}
+
+/* Custom hero styling for Wine industry */
+.section h1 {
+    background: linear-gradient(135deg, var(--wine-burgundy) 0%, #000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Wine-themed accents */
+.timeline-item::before {
+    background: linear-gradient(45deg, var(--wine-burgundy), var(--wine-gold));
+}
+
+/* Elegant pricing highlighting */
+.pricing-tier:nth-child(2) {
+    border-color: var(--wine-burgundy);
+    border-width: 2px;
+    position: relative;
+}
+
+.pricing-tier:nth-child(2)::after {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--wine-burgundy);
+    color: white;
+    padding: 0.25rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+/* Premium wine industry grid */
+.section:last-of-type div div {
+    padding: 1.5rem;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+    background: linear-gradient(145deg, #ffffff 0%, var(--wine-cream) 100%);
+}
+
+.section:last-of-type div div:hover {
+    border-color: var(--wine-burgundy);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(114, 47, 55, 0.1);
+}
+
+/* Sophisticated wine industry aesthetic */
+.section h2 {
+    color: var(--wine-burgundy);
+}
+
+/* Hover effects for wine elegance */
+.pricing-tier:hover {
+    background: linear-gradient(145deg, #ffffff 0%, var(--wine-cream) 100%);
+}
+
+/* Contact section wine theme */
+.contact {
+    background: linear-gradient(135deg, var(--wine-burgundy) 0%, #000 100%);
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .pricing-tier:nth-child(2)::after {
+        position: static;
+        transform: none;
+        display: block;
+        margin: -1rem -2rem 1rem;
+        text-align: center;
+    }
+}
