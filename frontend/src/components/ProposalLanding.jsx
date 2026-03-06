@@ -680,17 +680,17 @@ export default function ProposalLanding() {
             {/* Image with Quote Overlay */}
             <div className="order-2 lg:order-1 section-animate relative">
               <img 
-                src={ASSETS.grapes3} 
+                src="https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/fs6ynszw_u2462154512_High-end_cinematic_advertising_image_for_a_premiu_14d3c946-ccba-44b0-a442-8a195e99ff0c_3.png" 
                 alt="Wine expertise" 
                 className="w-full aspect-square object-cover"
               />
-              {/* Quote Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent flex items-end">
-                <div className="p-8 lg:p-12">
-                  <p className="text-white/90 text-xl lg:text-2xl font-light italic leading-relaxed mb-4">
+              {/* Quote Overlay - Centered */}
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                <div className="p-8 lg:p-12 text-center max-w-md">
+                  <p className="text-white text-xl lg:text-2xl font-light italic leading-relaxed mb-4">
                     "{t.quote.text}"
                   </p>
-                  <p className="text-white/50 text-sm uppercase tracking-[0.2em]">
+                  <p className="text-white/60 text-sm uppercase tracking-[0.2em]">
                     — {t.quote.author}
                   </p>
                 </div>
