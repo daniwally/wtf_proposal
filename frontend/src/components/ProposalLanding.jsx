@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { toast } from "sonner";
 import { 
   Check, ChevronDown, ArrowRight, Target, Zap, Globe, 
-  Users, TrendingUp, Award, Lightbulb,
-  Palette, Package, Megaphone, LineChart, Menu, X,
-  Briefcase, BarChart2, Camera, ShoppingBag, FileText, Search
+  Users, Award,
+  Palette, Megaphone, LineChart, Menu, X
 } from "lucide-react";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
 
 // Asset URLs
 const ASSETS = {
@@ -22,148 +17,146 @@ const ASSETS = {
   grapes3: "https://customer-assets.emergentagent.com/job_wine-brand-brasil/artifacts/qq7k0y6g_u2462154512_Ultra-immersive_macro_perspective_moving_along_th_f392ba18-f102-4b67-8e8e-dd0bb783e650_0.png",
 };
 
-// Phase data with expanded scope
+// Phase data - Portuguese
 const PHASES = [
   {
     id: 1,
     title: "Brand Development",
-    subtitle: "Desarrollo de Marca",
+    subtitle: "Desenvolvimento de Marca",
     duration: "Meses 1-3",
     icon: Palette,
-    description: "Construcción de los cimientos estratégicos y visuales de tu marca de vinos. Desde la conceptualización hasta un sistema de identidad completo listo para conquistar el mercado brasileño.",
+    description: "Construção dos alicerces estratégicos e visuais da sua marca de vinhos. Da conceituação até um sistema de identidade completo pronto para conquistar o mercado brasileiro.",
     scope: [
       {
-        title: "Naming & Arquitectura de Marca",
-        desc: "Desarrollo del nombre, tagline, propuesta de valor única y estructura de portfolio para posicionamiento premium en Brasil"
+        title: "Naming & Arquitetura de Marca",
+        desc: "Desenvolvimento do nome, tagline, proposta de valor única e estrutura de portfólio para posicionamento premium no Brasil"
       },
       {
-        title: "Sistema de Identidad Visual",
-        desc: "Logo principal, variantes, paleta de colores, tipografía, iconografía y guidelines de uso completos"
+        title: "Sistema de Identidade Visual",
+        desc: "Logo principal, variantes, paleta de cores, tipografia, iconografia e guidelines de uso completos"
       },
       {
-        title: "Diseño de Packaging",
-        desc: "3 líneas de producto con diseño de etiquetas, cápsulas, cajas y materiales POP diferenciados"
+        title: "Design de Packaging",
+        desc: "3 linhas de produto com design de rótulos, cápsulas, caixas e materiais POP diferenciados"
       },
       {
-        title: "Investigación de Mercado Brasil",
-        desc: "Análisis competitivo, mapeo de canales, perfil del consumidor brasileño y oportunidades de posicionamiento"
+        title: "Pesquisa de Mercado Brasil",
+        desc: "Análise competitiva, mapeamento de canais, perfil do consumidor brasileiro e oportunidades de posicionamento"
       },
       {
-        title: "Cumplimiento Regulatorio",
-        desc: "Guía de requisitos legales para comercialización de vinos en Brasil, etiquetado y certificaciones necesarias"
+        title: "Compliance Regulatório",
+        desc: "Guia de requisitos legais para comercialização de vinhos no Brasil, rotulagem e certificações necessárias"
       }
     ],
     deliverables: [
       "Brand Book completo",
-      "Diseño de etiquetas únicos",
-      "Manual de packaging y materiales",
-      "Reporte de investigación de mercado",
-      "Guía de compliance regulatorio Brasil"
+      "Design de rótulos únicos",
+      "Manual de packaging e materiais",
+      "Relatório de pesquisa de mercado",
+      "Guia de compliance regulatório Brasil"
     ]
   },
   {
     id: 2,
     title: "Market Launch Brasil",
-    subtitle: "Lanzamiento al Mercado",
+    subtitle: "Lançamento no Mercado",
     duration: "Meses 4-6",
     icon: Megaphone,
-    description: "Ejecución integral del lanzamiento en Brasil. Construimos tu presencia digital, creamos contenido premium y activamos campañas que generan awareness y demanda desde el día uno.",
+    description: "Execução integral do lançamento no Brasil. Construímos sua presença digital, criamos conteúdo premium e ativamos campanhas que geram awareness e demanda desde o primeiro dia.",
     scope: [
       {
-        title: "Estrategia Go-to-Market 360°",
-        desc: "Plan de lanzamiento detallado con canales, timing, inversión publicitaria y KPIs de éxito"
+        title: "Estratégia Go-to-Market 360°",
+        desc: "Plano de lançamento detalhado com canais, timing, investimento publicitário e KPIs de sucesso"
       },
       {
         title: "Plataforma Digital & E-commerce",
-        desc: "Website institucional + tienda online integrada con pasarelas de pago brasileñas y logística local"
+        desc: "Website institucional + loja online integrada com gateways de pagamento brasileiros e logística local"
       },
       {
-        title: "Producción de Contenido Premium",
-        desc: "Sesión fotográfica profesional, videos de marca, assets para redes sociales y materiales de venta"
+        title: "Produção de Conteúdo Premium",
+        desc: "Sessão fotográfica profissional, vídeos de marca, assets para redes sociais e materiais de venda"
       },
       {
-        title: "Campaña de Lanzamiento",
-        desc: "Activación en medios digitales, PR, eventos de presentación y sampling estratégico"
+        title: "Campanha de Lançamento",
+        desc: "Ativação em mídias digitais, PR, eventos de apresentação e sampling estratégico"
       },
       {
-        title: "Red de Influencers & Sommeliers",
-        desc: "Partnerships con líderes de opinión del mundo del vino en Brasil para amplificar el lanzamiento"
+        title: "Rede de Influencers & Sommeliers",
+        desc: "Parcerias com líderes de opinião do mundo do vinho no Brasil para amplificar o lançamento"
       }
     ],
     deliverables: [
       "Website + E-commerce funcionando",
-      "500+ assets de contenido",
-      "Video de marca (60s + cuts)",
-      "Campaña activa en medios",
-      "Red de 20+ influencers activada"
+      "500+ assets de conteúdo",
+      "Vídeo de marca (60s + cuts)",
+      "Campanha ativa em mídias",
+      "Rede de 20+ influencers ativada"
     ]
   },
   {
     id: 3,
     title: "Growth & Management",
-    subtitle: "Crecimiento y Gestión",
+    subtitle: "Crescimento e Gestão",
     duration: "Meses 7-12",
     icon: LineChart,
-    description: "Gestión continua y optimización para escalar resultados. Monitoreamos performance, ajustamos estrategias y expandimos tu presencia para consolidar la marca en el mercado brasileño.",
+    description: "Gestão contínua e otimização para escalar resultados. Monitoramos performance, ajustamos estratégias e expandimos sua presença para consolidar a marca no mercado brasileiro.",
     scope: [
       {
-        title: "Optimización de Campañas",
-        desc: "A/B testing continuo, optimización de audiencias, creatividades y pujas para maximizar ROAS"
+        title: "Otimização de Campanhas",
+        desc: "A/B testing contínuo, otimização de audiências, criativos e lances para maximizar ROAS"
       },
       {
-        title: "Gestión de Performance",
-        desc: "Monitoreo diario de KPIs, dashboards en tiempo real y reportes ejecutivos mensuales"
+        title: "Gestão de Performance",
+        desc: "Monitoramento diário de KPIs, dashboards em tempo real e relatórios executivos mensais"
       },
       {
-        title: "Estrategia de Expansión",
-        desc: "Análisis de nuevos canales de distribución, regiones y oportunidades de crecimiento en Brasil"
+        title: "Estratégia de Expansão",
+        desc: "Análise de novos canais de distribuição, regiões e oportunidades de crescimento no Brasil"
       },
       {
-        title: "Desarrollo Continuo de Marca",
-        desc: "Evolución visual, nuevas líneas de producto, ediciones limitadas y colaboraciones especiales"
+        title: "Desenvolvimento Contínuo de Marca",
+        desc: "Evolução visual, novas linhas de produto, edições limitadas e colaborações especiais"
       },
       {
-        title: "Campañas Estacionales",
-        desc: "Activaciones para fechas clave: vendimia, fiestas, Día del Vino, eventos gastronómicos"
+        title: "Campanhas Sazonais",
+        desc: "Ativações para datas-chave: vindima, festas, Dia do Vinho, eventos gastronômicos"
       }
     ],
     deliverables: [
-      "12 reportes de performance mensuales",
-      "Optimización continua de campañas",
-      "4 campañas estacionales",
-      "Plan de expansión año 2",
-      "Evolución de marca documentada"
+      "12 relatórios de performance mensais",
+      "Otimização contínua de campanhas",
+      "4 campanhas sazonais",
+      "Plano de expansão ano 2",
+      "Evolução de marca documentada"
     ]
   }
 ];
 
-// Timeline data
+// Timeline data - Portuguese
 const TIMELINE = [
-  { month: "1-3", label: "Brand Development", items: ["Naming", "Identidad", "Packaging", "Research"], color: "#000" },
-  { month: "4-6", label: "Market Launch", items: ["Digital", "Contenido", "Campaña", "PR"], color: "#000" },
-  { month: "7-12", label: "Growth", items: ["Optimización", "Expansión", "Performance"], color: "#000" }
+  { month: "1-3", label: "Brand Development", items: ["Naming", "Identidade", "Packaging", "Pesquisa"], color: "#000" },
+  { month: "4-6", label: "Market Launch", items: ["Digital", "Conteúdo", "Campanha", "PR"], color: "#000" },
+  { month: "7-12", label: "Growth", items: ["Otimização", "Expansão", "Performance"], color: "#000" }
 ];
 
-// Methodology items
+// Methodology items - Portuguese
 const METHODOLOGY = [
-  { icon: Zap, title: "AI-Powered", desc: "Sistema de desarrollo de marca impulsado por inteligencia artificial" },
-  { icon: Target, title: "85% Más Rápido", desc: "Que agencias tradicionales en tiempo de entrega" },
-  { icon: Award, title: "Wine Expertise", desc: "Portfolio incluye Casillero del Diablo y marcas premium" },
-  { icon: Globe, title: "Brasil Office", desc: "Equipo local en São Paulo para el mercado brasileño" }
+  { icon: Zap, title: "AI-Powered", desc: "Sistema de desenvolvimento de marca impulsionado por inteligência artificial" },
+  { icon: Target, title: "85% Mais Rápido", desc: "Que agências tradicionais em tempo de entrega" },
+  { icon: Award, title: "Wine Expertise", desc: "Portfólio inclui Casillero del Diablo e marcas premium" },
+  { icon: Globe, title: "Brasil Office", desc: "Equipe local em São Paulo para o mercado brasileiro" }
 ];
 
-// Credentials
+// Credentials - Portuguese
 const CREDENTIALS = [
-  { value: "15+", label: "Años en industria del vino" },
-  { value: "50+", label: "Marcas desarrolladas" },
-  { value: "8", label: "Mercados internacionales" },
-  { value: "360°", label: "Ejecución end-to-end" }
+  { value: "15+", label: "Anos na indústria do vinho" },
+  { value: "50+", label: "Marcas desenvolvidas" },
+  { value: "8", label: "Mercados internacionais" },
+  { value: "360°", label: "Execução end-to-end" }
 ];
 
 export default function ProposalLanding() {
   const [activePhase, setActivePhase] = useState(1);
-  const [formData, setFormData] = useState({ nombre: "", empresa: "", email: "", mensaje: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -184,25 +177,6 @@ export default function ProposalLanding() {
 
     return () => observer.disconnect();
   }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.nombre || !formData.empresa || !formData.email) {
-      toast.error("Por favor complete todos los campos requeridos");
-      return;
-    }
-
-    setIsSubmitting(true);
-    try {
-      await axios.post(`${API}/contact`, formData);
-      toast.success("¡Gracias! Nos pondremos en contacto pronto.");
-      setFormData({ nombre: "", empresa: "", email: "", mensaje: "" });
-    } catch (error) {
-      toast.error("Error al enviar. Por favor intente nuevamente.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -225,7 +199,7 @@ export default function ProposalLanding() {
           
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            {["Proyecto", "Fases", "Metodología", "Equipo", "Contacto"].map((item) => (
+            {["Projeto", "Fases", "Metodologia", "Equipe", "Contato"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -250,7 +224,7 @@ export default function ProposalLanding() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-black py-8 px-6 border-t border-white/10">
-            {["Proyecto", "Fases", "Metodología", "Equipo", "Contacto"].map((item) => (
+            {["Projeto", "Fases", "Metodologia", "Equipe", "Contato"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -264,7 +238,7 @@ export default function ProposalLanding() {
         )}
       </nav>
 
-      {/* Hero Section - No prices */}
+      {/* Hero Section - Portuguese */}
       <section className="relative min-h-screen flex items-center" data-testid="hero-section">
         <div className="absolute inset-0">
           <img 
@@ -285,27 +259,27 @@ export default function ProposalLanding() {
             </span>
           </div>
 
-          {/* Headline */}
+          {/* Headline - Portuguese */}
           <div className="max-w-4xl">
             <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6 opacity-0 animate-fade-in-up">
-              Propuesta de Proyecto
+              Proposta de Projeto
             </p>
             <h1 
               className="text-5xl sm:text-6xl lg:text-7xl font-light leading-[1.1] mb-8 opacity-0 animate-fade-in-up animate-delay-100"
               data-testid="hero-headline"
             >
-              Desarrollo Integral<br />
-              <span className="font-normal">Marca de Vinos</span><br />
-              <span className="text-white/50">para Brasil</span>
+              Desenvolvimento Integral<br />
+              <span className="font-normal">Marca de Vinhos</span><br />
+              <span className="text-white/50">para o Brasil</span>
             </h1>
 
-            {/* Subheadline */}
+            {/* Subheadline - Portuguese */}
             <p 
               className="text-xl text-white/60 max-w-xl mb-12 opacity-0 animate-fade-in-up animate-delay-200"
               data-testid="hero-subheadline"
             >
-              De concepto a líder de mercado. Naming, identidad, packaging, 
-              lanzamiento digital y gestión continua.
+              Do conceito ao líder de mercado. Naming, identidade, 
+              packaging, lançamento digital e gestão contínua.
             </p>
 
             {/* CTA */}
@@ -315,7 +289,7 @@ export default function ProposalLanding() {
                 className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 text-sm uppercase tracking-[0.15em] hover:bg-white/90 transition-colors"
                 data-testid="hero-cta-primary"
               >
-                Ver Propuesta
+                Ver Proposta
                 <ArrowRight size={18} />
               </button>
             </div>
@@ -328,19 +302,19 @@ export default function ProposalLanding() {
         </div>
       </section>
 
-      {/* Project Overview */}
-      <section id="proyecto" className="py-32 px-6 bg-black" data-testid="project-section">
+      {/* Project Overview - Portuguese */}
+      <section id="projeto" className="py-32 px-6 bg-black" data-testid="project-section">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="section-animate">
-              <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">El Proyecto</p>
+              <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">O Projeto</p>
               <h2 className="text-4xl lg:text-5xl font-light mb-8">
-                Construir una marca de vinos que conquiste Brasil
+                Construir uma marca de vinhos que conquiste o Brasil
               </h2>
               <p className="text-white/60 text-lg leading-relaxed mb-8">
-                Un programa de 12 meses para desarrollar, lanzar y escalar tu marca 
-                de vinos en el mercado brasileño. Desde la creación del nombre hasta 
-                la gestión continua de campañas y expansión.
+                Um programa de 12 meses para desenvolver, lançar e escalar sua marca 
+                de vinhos no mercado brasileiro. Da criação do nome até a gestão contínua 
+                de campanhas e expansão.
               </p>
               <div className="flex items-center gap-8">
                 <div>
@@ -355,7 +329,7 @@ export default function ProposalLanding() {
                 <div className="w-px h-12 bg-white/20" />
                 <div>
                   <p className="text-3xl font-light">360°</p>
-                  <p className="text-white/40 text-sm uppercase tracking-wider">Alcance</p>
+                  <p className="text-white/40 text-sm uppercase tracking-wider">Escopo</p>
                 </div>
               </div>
             </div>
@@ -374,13 +348,13 @@ export default function ProposalLanding() {
         </div>
       </section>
 
-      {/* Phases Section - Detailed scope, no prices */}
+      {/* Phases Section - Portuguese */}
       <section id="fases" className="py-32 px-6 bg-zinc-950" data-testid="phases-section">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16 section-animate">
-            <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Alcance del Proyecto</p>
+            <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Escopo do Projeto</p>
             <h2 className="text-4xl lg:text-5xl font-light">
-              Fases del Proyecto
+              Fases do Projeto
             </h2>
           </div>
 
@@ -424,7 +398,7 @@ export default function ProposalLanding() {
 
                   {/* Deliverables */}
                   <div className="bg-white/5 border border-white/10 p-6">
-                    <p className="text-white/40 text-xs uppercase tracking-[0.2em] mb-4">Entregables</p>
+                    <p className="text-white/40 text-xs uppercase tracking-[0.2em] mb-4">Entregáveis</p>
                     <div className="space-y-3">
                       {currentPhase.deliverables.map((item, i) => (
                         <div key={i} className="flex items-start gap-3">
@@ -459,13 +433,13 @@ export default function ProposalLanding() {
         </div>
       </section>
 
-      {/* Timeline Section */}
+      {/* Timeline Section - Portuguese */}
       <section className="py-32 px-6 bg-black" data-testid="timeline-section">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 section-animate">
-            <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Planificación</p>
+            <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Planejamento</p>
             <h2 className="text-4xl lg:text-5xl font-light">
-              Roadmap 12 Meses
+              Roadmap de 12 Meses
             </h2>
           </div>
 
@@ -524,18 +498,18 @@ export default function ProposalLanding() {
         </div>
       </section>
 
-      {/* Methodology Section */}
-      <section id="metodología" className="py-32 px-6 bg-zinc-950" data-testid="methodology-section">
+      {/* Methodology Section - Portuguese */}
+      <section id="metodologia" className="py-32 px-6 bg-zinc-950" data-testid="methodology-section">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="section-animate">
-              <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Cómo Trabajamos</p>
+              <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Como Trabalhamos</p>
               <h2 className="text-4xl lg:text-5xl font-light mb-8">
-                Metodología WTF
+                Metodologia WTF
               </h2>
               <p className="text-white/60 text-lg leading-relaxed mb-12">
-                Combinamos inteligencia artificial con 15 años de experiencia en la industria 
-                del vino para entregar resultados extraordinarios en tiempo récord.
+                Combinamos inteligência artificial com 15 anos de experiência na indústria 
+                do vinho para entregar resultados extraordinários em tempo recorde.
               </p>
 
               <div className="grid grid-cols-2 gap-6">
@@ -563,8 +537,8 @@ export default function ProposalLanding() {
         </div>
       </section>
 
-      {/* Team Credentials Section */}
-      <section id="equipo" className="py-32 px-6 bg-black" data-testid="credentials-section">
+      {/* Team Credentials Section - Portuguese */}
+      <section id="equipe" className="py-32 px-6 bg-black" data-testid="credentials-section">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1 section-animate">
@@ -576,9 +550,9 @@ export default function ProposalLanding() {
             </div>
 
             <div className="order-1 lg:order-2 section-animate">
-              <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">El Equipo</p>
+              <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">A Equipe</p>
               <h2 className="text-4xl lg:text-5xl font-light mb-8">
-                Credenciales
+                Credenciais
               </h2>
 
               <div className="grid grid-cols-2 gap-8 mb-12">
@@ -593,15 +567,15 @@ export default function ProposalLanding() {
               <div className="space-y-4 pt-8 border-t border-white/10">
                 <div className="flex items-center gap-4">
                   <Award className="text-white/40" size={20} />
-                  <span className="text-white/70">Portfolio: Casillero del Diablo, Absolut, +50 marcas</span>
+                  <span className="text-white/70">Portfólio: Casillero del Diablo, Absolut, +50 marcas</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <Globe className="text-white/40" size={20} />
-                  <span className="text-white/70">Oficina en São Paulo para mercado brasileño</span>
+                  <span className="text-white/70">Escritório em São Paulo para o mercado brasileiro</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <Users className="text-white/40" size={20} />
-                  <span className="text-white/70">Especialista dedicado en industria del vino</span>
+                  <span className="text-white/70">Especialista dedicado na indústria do vinho</span>
                 </div>
               </div>
             </div>
@@ -609,33 +583,33 @@ export default function ProposalLanding() {
         </div>
       </section>
 
-      {/* Contact CTA Section - Investment here */}
-      <section id="contacto" className="py-32 px-6 bg-zinc-950" data-testid="contact-section">
+      {/* Contact CTA Section - Portuguese */}
+      <section id="contato" className="py-32 px-6 bg-zinc-950" data-testid="contact-section">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16 section-animate">
-            <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Inversión</p>
+            <p className="text-white/40 text-sm uppercase tracking-[0.3em] mb-6">Investimento</p>
             <h2 className="text-4xl lg:text-5xl font-light mb-8">
-              Comenzar el Proyecto
+              Iniciar o Projeto
             </h2>
             
             {/* Investment Display */}
             <div className="inline-flex flex-col items-center p-8 bg-white/[0.02] border border-white/10 mb-8">
-              <p className="text-white/40 text-sm uppercase tracking-[0.2em] mb-4">Fee Mensual</p>
+              <p className="text-white/40 text-sm uppercase tracking-[0.2em] mb-4">Fee Mensal</p>
               <p className="text-5xl lg:text-6xl font-light mb-2" data-testid="investment-monthly">USD 7,500</p>
               <p className="text-white/40">Programa de 12 meses</p>
               <div className="w-16 h-px bg-white/20 my-6" />
-              <p className="text-white/40 text-sm uppercase tracking-[0.2em] mb-2">Inversión Total Anual</p>
+              <p className="text-white/40 text-sm uppercase tracking-[0.2em] mb-2">Investimento Total Anual</p>
               <p className="text-2xl font-light" data-testid="investment-annual">USD 90,000</p>
             </div>
 
             <p className="text-white/50 max-w-xl mx-auto">
-              Contactanos para agendar una sesión estratégica y discutir los próximos pasos.
+              Entre em contato para agendar uma sessão estratégica e discutir os próximos passos.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer - Portuguese */}
       <footer className="py-12 px-6 bg-black border-t border-white/10" data-testid="footer">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -646,7 +620,7 @@ export default function ProposalLanding() {
             </p>
 
             <div className="flex items-center gap-4">
-              <span className="text-white/30 text-sm">Propuesta para</span>
+              <span className="text-white/30 text-sm">Proposta para</span>
               <span className="text-white/60">Grupo Upper Blanc</span>
             </div>
           </div>
