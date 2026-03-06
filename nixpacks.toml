@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["python311", "nodejs_18"]
+
+[phases.install]
+cmds = [
+  "cd backend && pip install -r requirements.txt",
+  "cd frontend && yarn install && yarn build"
+]
+
+[phases.build]
+cmds = ["cd frontend && yarn build"]
+
+[start]
+cmd = "cd backend && uvicorn server:app --host 0.0.0.0 --port ${PORT:-8001}"
