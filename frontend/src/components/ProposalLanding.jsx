@@ -311,7 +311,7 @@ export default function ProposalLanding() {
           <img 
             src={ASSETS.logoWtfWhite} 
             alt="WTF Agency" 
-            className="h-8 object-contain"
+            className="h-10 object-contain"
             data-testid="nav-logo"
           />
           
@@ -390,7 +390,7 @@ export default function ProposalLanding() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 w-full">
           {/* Logos */}
           <div className="flex items-center gap-6 mb-16 opacity-0 animate-fade-in-up">
-            <img src={ASSETS.logoWtfWhite} alt="WTF Agency" className="h-12" data-testid="hero-wtf-logo" />
+            <img src={ASSETS.logoWtfWhite} alt="WTF Agency" className="h-16" data-testid="hero-wtf-logo" />
             <div className="w-px h-10 bg-white/30" />
             <span className="text-white/60 text-sm uppercase tracking-[0.2em]" data-testid="hero-client-logo">
               Grupo Upper Blanc
