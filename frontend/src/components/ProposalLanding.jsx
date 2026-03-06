@@ -270,9 +270,9 @@ export default function ProposalLanding() {
           <img 
             src={ASSETS.vineyard2} 
             alt="Vineyard" 
-            className="w-full h-full object-cover opacity-40"
+            className="w-full h-full object-cover opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 w-full">
