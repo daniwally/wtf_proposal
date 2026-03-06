@@ -1,0 +1,55 @@
+{
+  "clientId": "ford",
+  "industry": "Automotive",
+  "title": "Ford Digital Transformation",
+  "hero": {
+    "headline": "Driving Ford's Digital Revolution",
+    "subtitle": "Innovative automotive marketing for the electric future"
+  },
+  "pricing": {
+    "discovery": { 
+      "name": "Discovery", 
+      "price": "$25K", 
+      "duration": "6 weeks",
+      "features": ["Brand Heritage Analysis", "Electric Vehicle Market Research", "Consumer Journey Mapping", "Competitive Landscape Study"]
+    },
+    "build": { 
+      "name": "Campaign Build", 
+      "price": "$75K", 
+      "duration": "16 weeks",
+      "features": ["Multi-channel Strategy Development", "Creative Campaign Creation", "Digital Platform Integration", "Launch Preparation"]
+    },
+    "amplify": { 
+      "name": "Amplification", 
+      "price": "$20K/mo", 
+      "duration": "Ongoing",
+      "features": ["Performance Optimization", "Market Expansion", "Seasonal Campaigns", "Innovation Integration"]
+    }
+  },
+  "timeline": [
+    { 
+      "phase": "Brand Analysis & Research", 
+      "duration": "Weeks 1-6",
+      "description": "Deep dive into Ford's legacy while mapping the path to electric future leadership"
+    },
+    { 
+      "phase": "Strategy & Creative Development", 
+      "duration": "Weeks 7-16", 
+      "description": "Multi-channel automotive strategy with focus on electric vehicle market penetration"
+    },
+    { 
+      "phase": "Launch & Optimization", 
+      "duration": "Week 17+", 
+      "description": "Campaign execution with continuous optimization and market expansion"
+    }
+  ],
+  "theme": {
+    "primaryColor": "#0066cc",
+    "secondaryColor": "#c0c0c0",
+    "backgroundGradient": "linear-gradient(135deg, #0066cc 0%, #000 100%)"
+  },
+  "contact": {
+    "industry_specialist": "Automotive & Transportation",
+    "meeting_cta": "Ready to electrify Ford's brand presence?"
+  }
+}
